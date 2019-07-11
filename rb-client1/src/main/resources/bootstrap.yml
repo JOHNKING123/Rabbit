@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: rb-client1
+  cloud:
+    config:
+      uri: http://config:7181
+      fail-fast: false
+      profile: ${config.profile:uat}
+
+  profiles:
+    active: ${config.profile:uat}

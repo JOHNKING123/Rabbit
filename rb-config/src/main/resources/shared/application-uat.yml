@@ -1,0 +1,52 @@
+## 禁用重试调用功能
+## feign 是在ribbon 和 hystrix 基础上封装的，所以ribbon的超时也是feign 的超时
+timeout:
+  connect: 300
+  read: 12000
+
+ribbon:
+  ConnectTimeout: ${timeout.connect}
+  ReadTimeout: ${timeout.read}
+  OkToRetryOnAllOperations: false
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  ServerListRefreshInterval: 1000
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:7182/eureka/
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.zhengcq.*.model
+spring:
+
+  datasource:
+      name: test
+      url: jdbc:mysql://47.105.143.13:3307/testDb?characterEncoding=utf8&allowMultiQueries=true
+      username: root
+      password: 123456
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+feign:
+  hystrix:
+    enabled: true

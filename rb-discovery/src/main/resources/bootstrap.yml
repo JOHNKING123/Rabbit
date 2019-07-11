@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: rb-discovery
+  cloud:
+    config:
+      uri: http://rb-config:7181
+      fail-fast: false
+      profile: ${config.profile:uat}
+
+  profiles:
+    active: ${config.profile:uat}
