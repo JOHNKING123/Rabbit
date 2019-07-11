@@ -2,6 +2,7 @@ package com.zhengcq.srv.client1.controller;
 
 import com.zhengcq.srv.client1.model.User;
 import com.zhengcq.srv.client1.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ public class UserController  {
     @Autowired
     private UserService userService;
 
+    @ApiOperation("根据Id获取用户信息")
     @GetMapping("/get-by-id")
     public String getById(@RequestParam("userId")Long userId){
         User user = userService.getByUserId(userId);
